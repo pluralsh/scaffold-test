@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: values-checker-
+  name: values-checker-{{ "%Y%m%d%H%M%S" | date: "utc" }}
   labels:
     app: values-checker
 spec:

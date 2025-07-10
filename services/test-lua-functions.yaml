@@ -5,14 +5,14 @@ metadata:
   namespace: scaffold-test
 spec:
   namespace: test-lua-functions
-  name: scaffold-test
+  name: test-lua-functions
   repositoryRef:
     kind: GitRepository
     name: scaffold-test
     namespace: scaffold-test
   git:
     ref: main
-    folder: charts/simple-helm-nginx
+    folder: /charts/simple-helm-nginx
   helm:
     luaScript: |
       values = {}

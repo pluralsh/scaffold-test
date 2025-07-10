@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: reference-values
+data:
+  reference.yaml: |-
+    affinity: {}
+    image:
+      pullPolicy: IfNotPresent
+      repository: nginx
+      tag: 1.23.0
+    nodeSelector: {}
+    replicaCount: 1
+    resources: {}
+    service:
+      port: 80
+      type: ClusterIP
+    tolerations: []

@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: values-checker-{{ uuid | slice: 0, 8 }}
+  name: values-checker-{{ uuidv4 | slice: 0, 8 }}
   labels:
     app: values-checker
 spec:

@@ -17,6 +17,18 @@ spec:
     luaScript: |
       values = {}
       valuesFiles = {}
+      local content, err = fs.walk(".")
+      assert(content, "Expected fs.walk to return files, but got error: " .. (err or "nil"))
+      
+      -- Count number of entries
+      local count = 0
+      for _ in pairs(content) do
+        count = count + 1
+      end
+
+      -- Assert expected number
+      local expected = 9
+      assert(count == expected, "Expected " .. expected .. " files, but got: " .. count)
   clusterRef:
     name: existing
     namespace: scaffold-test

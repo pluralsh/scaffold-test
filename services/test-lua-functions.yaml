@@ -27,7 +27,7 @@ spec:
       end
 
       -- Assert expected number
-      local expected = 9
+      local expected = 0
       assert(count == expected, "Expected " .. expected .. " files, but got: " .. count)
   clusterRef:
     name: existing

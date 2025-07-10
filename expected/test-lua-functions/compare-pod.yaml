@@ -38,7 +38,7 @@ spec:
 
               diff -u /tmp/ref.yaml /tmp/current.yaml
               if [ $? -ne 0 ]; then
-                echo "❌ Values do not match"
+                echo "Values do not match"
                 exit 1
               fi
 

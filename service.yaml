@@ -13,3 +13,6 @@ spec:
   git:
     ref: main
     folder: services
+  clusterRef:
+    name: existing
+    namespace: scaffold-test

@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: values-checker-{{ "%Y%m%d%H%M%S" | date: "utc" }}
+  name: values-checker-{{ "now" | dateInZone: "UTC", "%Y%m%d%H%M%S" }}
   labels:
     app: values-checker
 spec:

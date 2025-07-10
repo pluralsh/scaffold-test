@@ -1,0 +1,22 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: test-lua-functions
+  namespace: scaffold-test
+spec:
+  namespace: test-lua-functions
+  name: scaffold-test
+  repositoryRef:
+    kind: GitRepository
+    name: scaffold-test
+    namespace: scaffold-test
+  git:
+    ref: main
+    folder: charts/simple-helm-nginx
+  helm:
+    luaScript: |
+      values = {}
+      valuesFiles = {}
+  clusterRef:
+    name: existing
+    namespace: scaffold-test

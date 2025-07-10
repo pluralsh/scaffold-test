@@ -1,0 +1,6 @@
+Your Nginx deployment is ready!
+
+You can use the following command to forward your local port to the service:
+  kubectl port-forward service/{{ .Release.Name }}-nginx {{ .Values.service.port }}:{{ .Values.service.port }}
+
+Then, you can access your application at: http://localhost:{{ .Values.service.port }}

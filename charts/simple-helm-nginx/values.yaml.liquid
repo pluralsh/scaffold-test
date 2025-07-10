@@ -1,0 +1,6 @@
+
+{% if contexts.helm-app.image %}
+image:
+  tag: {{ contexts.helm-app.image.tag }}
+{% endif %}
+

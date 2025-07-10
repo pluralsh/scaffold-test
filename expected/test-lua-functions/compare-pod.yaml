@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: values-checker
+  generateName: values-checker-
   labels:
     app: values-checker
 spec:

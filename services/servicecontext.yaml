@@ -1,0 +1,9 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceContext
+metadata:
+  name: simple-helm-context
+  namespace: scaffold-test
+spec:
+  configuration:
+      image:
+        tag: 1.28.0

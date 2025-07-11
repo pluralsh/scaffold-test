@@ -1,0 +1,24 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: test-assert-context
+  namespace: scaffold-test
+spec:
+  namespace: test-assert-context
+  name: test-assert-context
+  repositoryRef:
+    kind: GitRepository
+    name: scaffold-test
+    namespace: scaffold-test
+  git:
+    ref: main
+    folder: /charts/simple-helm-nginx
+  helm:
+    luaScript: |
+      values = {}
+      valuesFiles = {}
+  clusterRef:
+    name: existing
+    namespace: scaffold-test
+  contexts:
+    - simple-helm-context

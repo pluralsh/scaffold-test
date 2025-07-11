@@ -1,6 +1,6 @@
 
-{% if contexts.helm-app.image %}
+{% if contexts.simple-helm-context.image %}
 image:
-  tag: {{ contexts.helm-app.image.tag }}
+  tag: {{ contexts.simple-helm-context.image.tag }}
 {% endif %}
 

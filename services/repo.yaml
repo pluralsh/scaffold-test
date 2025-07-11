@@ -2,6 +2,5 @@ apiVersion: deployments.plural.sh/v1alpha1
 kind: GitRepository
 metadata:
   name: scaffold-test
-  namespace: scaffold-test
 spec:
   url: https://github.com/pluralsh/scaffold-test.git

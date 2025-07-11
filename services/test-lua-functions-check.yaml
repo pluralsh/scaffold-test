@@ -2,7 +2,6 @@ apiVersion: deployments.plural.sh/v1alpha1
 kind: ServiceDeployment
 metadata:
   name: test-lua-functions-check
-  namespace: scaffold-test
 spec:
   namespace: test-lua-functions
   name: test-lua-functions-check

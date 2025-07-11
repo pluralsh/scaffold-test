@@ -29,6 +29,22 @@ spec:
       -- Assert expected number
       local expected = 9
       assert(count == expected, "Expected " .. expected .. " files, but got: " .. count)
+      
+      local valuesYamlStr = fs.read("values.yaml")
+      local valuesData = encoding.yamlDecode(valuesYamlStr)
+      local expectedReplicaCount = 1
+      local replicaCount = valuesData["replicaCount"]
+      assert(replicaCount == expectedReplicaCount, "Expected " .. expectedReplicaCount .. " but got: " .. replicaCount)
+
+      local tag = valuesData["image"]["tag"]
+      expectedTag = "1.23.0"
+      assert(tag == expectedTag, "Expected " .. expectedTag .. " but got: " .. tag)
+      local parts = utils.splitString(tag, ".")
+      assert(#parts == 3, "Expected 3 parts but got: " .. #parts)	
+      assert(parts[1] == "1", "Expected 1 but got: " .. parts[1])
+      assert(parts[2] == "23", "Expected 23 but got: " .. parts[2])
+      assert(parts[3] == "0", "Expected 0 but got: " .. parts[3])
+
   clusterRef:
     name: existing
     namespace: scaffold-test

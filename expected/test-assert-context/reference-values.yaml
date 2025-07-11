@@ -10,7 +10,7 @@ data:
       repository: nginx
       tag: 1.28.0
     nodeSelector: {}
-    replicaCount: 2
+    replicaCount: 1
     resources: {}
     service:
       port: 80

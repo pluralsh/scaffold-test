@@ -1,0 +1,58 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: values-checker
+  labels:
+    app: values-checker
+spec:
+  backoffLimit: 0  # Fail fast, no retries
+  template:
+    metadata:
+      labels:
+        app: values-checker
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: checker
+          image: alpine:3.19
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              echo "Waiting for /config/values.yaml...";
+              for i in $(seq 1 60); do
+                [ -f /config/values.yaml ] && break
+                echo "Still waiting..."
+                sleep 1
+              done
+
+              if [ ! -f /config/values.yaml ]; then
+                echo "Timed out waiting for values.yaml"
+                exit 1
+              fi
+
+              apk add --no-cache yq > /dev/null
+
+              echo "Comparing values..."
+              yq -P '.' /config/values.yaml > /tmp/current.yaml
+              yq -P '.' /ref/reference.yaml > /tmp/ref.yaml
+
+              diff -u /tmp/ref.yaml /tmp/current.yaml
+              if [ $? -ne 0 ]; then
+                echo "Values do not match"
+                exit 1
+              fi
+
+              echo "Values match"
+              exit 0
+          volumeMounts:
+            - name: values-volume
+              mountPath: /config
+            - name: ref-volume
+              mountPath: /ref
+      volumes:
+      - name: values-volume
+        configMap:
+          name: test-assert-context-values
+      - name: ref-volume
+        configMap:
+          name: reference-values

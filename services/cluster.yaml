@@ -3,4 +3,4 @@ kind: Cluster
 metadata:
   name: existing
 spec:
-  handle: mgm
+  handle: mgmt

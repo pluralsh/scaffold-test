@@ -1,0 +1,18 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: test-lua-functions-check
+  namespace: scaffold-test
+spec:
+  namespace: test-lua-assert
+  name: test-lua-assert-check
+  repositoryRef:
+    kind: GitRepository
+    name: scaffold-test
+    namespace: scaffold-test
+  git:
+    ref: main
+    folder: /expected/test-lua-assert
+  clusterRef:
+    name: existing
+    namespace: scaffold-test

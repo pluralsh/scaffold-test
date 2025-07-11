@@ -18,6 +18,7 @@ spec:
       values = {}
       valuesFiles = {}
       values["replicaCount"] = 2
+      values["image"] = {}
       values["image"]["tag"] = "1.29.0"
 
   clusterRef:

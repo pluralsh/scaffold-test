@@ -1,0 +1,25 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: test-lua-assert
+  namespace: scaffold-test
+spec:
+  namespace: test-lua-assert
+  name: test-lua-assert
+  repositoryRef:
+    kind: GitRepository
+    name: scaffold-test
+    namespace: scaffold-test
+  git:
+    ref: main
+    folder: /charts/simple-helm-nginx
+  helm:
+    luaScript: |
+      values = {}
+      valuesFiles = {}
+      values["replicaCount"] = 2
+      values["image"]["tag"] = "1.29.0"
+
+  clusterRef:
+    name: existing
+    namespace: scaffold-test

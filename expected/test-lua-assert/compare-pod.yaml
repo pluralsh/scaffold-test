@@ -52,7 +52,7 @@ spec:
       volumes:
       - name: values-volume
         configMap:
-          name: test-lua-functions-values
+          name: test-lua-assert-values
       - name: ref-volume
         configMap:
           name: reference-values

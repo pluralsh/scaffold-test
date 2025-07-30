@@ -18,7 +18,9 @@ spec:
       valuesFiles = {}
       values["replicaCount"] = 2
       values["image"] = {}
+      values["image"]["repository"] = "nginx"
       values["image"]["tag"] = "1.29.0"
+      values["image"]["pullPolicy"] = "IfNotPresent"
 
   clusterRef:
     name: existing

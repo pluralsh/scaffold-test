@@ -1,0 +1,51 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: test-lua-merge
+spec:
+  namespace: test-lua-merge
+  name: test-lua-merge
+  repositoryRef:
+    kind: GitRepository
+    name: scaffold-test
+    namespace: scaffold-test
+  git:
+    ref: main
+    folder: /charts/lua-merge
+  helm:
+    luaScript: |
+      values = {}
+      valuesFiles = {}
+      -- Define paths
+      -- the utils.pathJoin expects a list of strings
+      
+      basePath = utils.pathJoin({"base", "pod.yaml"})
+      patchPath = utils.pathJoin({"patch", "pod.yaml"})
+      
+      -- Read files
+      local baseStr = fs.read(basePath)
+      local patchStr = fs.read(patchPath)
+      local base = encoding.yamlDecode(baseStr)
+      local patch = encoding.yamlDecode(patchStr)
+      local result, err = utils.merge(base, patch)
+      values["containers"] = result["spec"]["containers"]
+      
+      local input = {"app/frontend", "tier/backend", "env/prod"}
+      
+      -- Table to hold labels
+      local labels = {}
+      
+      -- Loop through the list
+      for _, str in ipairs(input) do
+        local parts = utils.splitString(str, "/")
+        if #parts == 2 then
+          local key = parts[1]
+          local value = parts[2]
+          labels[key] = value
+        end
+      end
+      values["podLabels"] = labels
+
+  clusterRef:
+    name: existing
+    namespace: scaffold-test

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: result
+  namespace: {{ .Values.namespace }}
+  labels:
+{{ toYaml .Values.podLabels | indent 4 }}
+spec:
+  containers:
+{{ toYaml .Values.containers | indent 4 }}

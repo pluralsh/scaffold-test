@@ -1,0 +1,17 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: test-lua-merge-check
+spec:
+  namespace: test-lua-merge
+  name: test-lua-merge-check
+  repositoryRef:
+    kind: GitRepository
+    name: scaffold-test
+    namespace: scaffold-test
+  git:
+    ref: main
+    folder: /expected/test-lua-merge
+  clusterRef:
+    name: existing
+    namespace: scaffold-test
